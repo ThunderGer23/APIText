@@ -1,0 +1,5 @@
+/APIText
+/__pycache__
+/routes/__pycache__
+/models/__pycache__
+/schemas/__pycache__
