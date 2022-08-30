@@ -1,7 +1,7 @@
 <h3 align="center">
     <img height="150" src="/lib/assets/logoAthena.png" width="150"/>
 
-<FONT SIZE=3>APImg de Athena</FONT>
+<FONT SIZE=3>APIText de Athena</FONT>
 </h3>
 
 # Intro
