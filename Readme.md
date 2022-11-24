@@ -137,7 +137,7 @@ Para confirmar que el entorno virtual esta encendido debe aparecernos entre pare
 (nombre del entorno virtual) C:\Users\toled\Documents\APIText>
 ```
 
-Como ya confirmamos que nuestro entorno virtual esta encendido procederemos a instalr las herramientas necesarias para poder usar la API (estas herramientas y sus versiones estan en el documento **requirements.txt**)
+Como ya confirmamos que nuestro entorno virtual esta encendido procederemos a instalr las herramientas necesarias para poder usar la API (estas herramientas y sus versiones estan en el documento <a href="https://github.com/ThunderGer23/APIText/blob/R2D2/requirements.txt">**requirements.txt**)</a>
 
 <h5 align="center"><code>pip install -r requirements.txt</code></h5>
 
@@ -147,7 +147,7 @@ _El uso de pruebas de integración dentro del proyecto nos da la ventaja de pode
 
 Para esta parte se hace uso de la herramienta de docker, la cual nos permite hacer un contenedor que almacene la API; para lograr esto se deben realizar las siguientes configuraciones
 
-Primero se crea un documento llamado **Dockerfile** con la siguiente configuración:
+Primero se crea un documento llamado <a href="https://github.com/ThunderGer23/APIText/blob/R2D2/Dockerfile">**Dockerfile**</a> con la siguiente configuración:
 
 ~~~
 FROM ubuntu
@@ -176,7 +176,7 @@ COPY ./ /code
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
 ~~~
 
-Despues un documento llamado **docker-compose.yml** con la siguiente configuración:
+Despues un documento llamado <a href="https://github.com/ThunderGer23/APIText/blob/R2D2/docker-compose.yml">**docker-compose.yml**</a> con la siguiente configuración:
 
 ~~~
 version: "3.9"
