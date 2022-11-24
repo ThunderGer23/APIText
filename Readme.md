@@ -116,19 +116,86 @@ _De manera adicional se incluiran archivos de la arquitectura y funcionamiento d
 
 #### Pruebas Unitarias 👨‍💻
 
-_El uso de pruebas unitarias dentro del proyecto nos permite detectar errores dentro de cada funcionalidad del sistema, son de gran ayuda a la hora de intentar agregar una nueva funcionalidad así como ahorrar tiempo al momento de testear el sistema._
+_El uso de pruebas unitarias dentro del proyecto nos permite detectar errores dentro de cada funcionalidad del sistema, son de gran ayuda a la hora de intentar agregar una nueva funcionalidad así como ahorrar tiempo al momento de testear el sistema_.
+
+
+Primero es necesario crear un entorno virtual con el siguiente comando en una terminal **CMD**:
+
+<h5 align="center"><code>python -m venv "nombre del entorno virtual"</code></h5>
+
+Una vez que nuestro entorno virtual este creado debemos ponerlo en marcha; primero entratemos hasta la carpeta _Scripts_
+
+<code>cd .\\"nombre del entorno virtual"\Scripts</code>
+
+Ya dentro del directorio escribimos lo siguiente en la terminal
+
+<h5 align="center"><code>activate.bat </code></h5>
+
+Para confirmar que el entorno virtual esta encendido debe aparecernos entre parentesis el nombre que le asignamos a nuestro entorno virtual seguido de la ruta como se muestra en este ejemplo
 
 ```
-Agregar instrucciones para la ejecución	de las pruebas unitarias
+(nombre del entorno virtual) C:\Users\toled\Documents\APIText>
 ```
+
+Como ya confirmamos que nuestro entorno virtual esta encendido procederemos a instalr las herramientas necesarias para poder usar la API (estas herramientas y sus versiones estan en el documento **requirements.txt**)
+
+<h5 align="center"><code>pip install -r requirements.txt</code></h5>
 
 #### Pruebas de Integración 🔌
 
 _El uso de pruebas de integración dentro del proyecto nos da la ventaja de poder identificar de manera rápida las conexiones fallidas entre este y más microservicios que componen al software así como la integración al backend principal._
 
-```
-Agregar instrucciones para la ejecución	de las pruebas unitarias
-```
+Para esta parte se hace uso de la herramienta de docker, la cual nos permite hacer un contenedor que almacene la API; para lograr esto se deben realizar las siguientes configuraciones
+
+Primero se crea un documento llamado **Dockerfile** con la siguiente configuración:
+
+~~~
+FROM ubuntu
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /code
+
+RUN apt-get update \
+  && apt-get -y install tesseract-ocr \
+  && apt-get install -y python3 python3-distutils python3-pip \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 --no-cache-dir install --upgrade pip \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN apt update \
+  && apt-get install ffmpeg libsm6 libxext6 -y
+
+COPY ./requirements.txt /code/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+COPY ./ /code
+ 
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+~~~
+
+Despues un documento llamado **docker-compose.yml** con la siguiente configuración:
+
+~~~
+version: "3.9"
+services:
+  apidocker:
+    build: ./
+    ports:
+      - "8000:8000"
+    environment:
+      - TESSDATA_PREFIX=/code   
+~~~
+
+Y ahora se deben ejecutar los siguientes comandos en la terminal
+
+<h5 align="center"><code>docker compose up</code></h5>
+
+Una vez creado el contenedor podra acceder a la siguiente direccion **local** en su navegador
+
+<h5 align="center"><code><a>http://localhost:8000/docs#/default/testing_test_get</a></code></h5>
 
 <p align="right">
   (<a href="#pruebas-software">Pruebas Software</a>)
@@ -146,6 +213,86 @@ _A continuación se muestran los diagramas de funcionamiento general de la API_
 ## Despliegue 📦
 
 _El despliegue se realiza de manera automatico con railway._
+
+Primero nos dirigimos a la siguiente direccion <a href="https://railway.app/dashboard">https://railway.app/dashboard</a>
+
+* Nota.- Es necesario contar con una cuenta de <a href="https://railway.app/">Railway</a>
+
+Hacemos click en "New Project"
+
+![1](lib/assets/steps/1.PNG)
+
+Click en ""Deploy from GitHub repo"
+
+![2](lib/assets/steps/2.PNG)
+
+Type "dock[\[enter]]"
+
+Click en "Add variables"
+
+![3](lib/assets/steps/3.PNG)
+
+Click en "Add"
+
+![4](lib/assets/steps/4.PNG)
+
+Click en "New Variable"
+
+![5](lib/assets/steps/5.PNG)
+
+Click en el campo "Value"
+
+![6](lib/assets/steps/6.PNG)
+
+Oprima \[[ctrl]]+\[[V]]
+
+Click en "Add"
+
+![7](lib/assets/steps/7.PNG)
+
+Oprima este icono
+
+![8](lib/assets/steps/8.PNG)
+
+Oprima este boton
+
+![9](lib/assets/steps/9.PNG)
+
+Oprima aqui
+
+![10](lib/assets/steps/10.PNG)
+
+Click en "Settings"
+
+![11](lib/assets/steps/11.PNG)
+
+Click en "Generate Domain"
+
+![12](lib/assets/steps/12.PNG)
+
+Click en "View Logs"
+
+![13](lib/assets/steps/13.PNG)
+
+Click en este icono
+
+![14](lib/assets/steps/14.PNG)
+
+Click en "testdocker-production.up.railway.app"
+
+![15](lib/assets/steps/15.PNG)
+
+Click en "Testing"
+
+![16](lib/assets/steps/16.PNG)
+
+Click en "Try it out"
+
+![17](lib/assets/steps/17.PNG)
+
+Click en "Execute"
+
+![18](lib/assets/steps/18.PNG)
 
 <p align="right">(<a href="#intro">Inicio</a>)</p>
 
