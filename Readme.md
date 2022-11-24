@@ -137,7 +137,7 @@ Para confirmar que el entorno virtual esta encendido debe aparecernos entre pare
 (nombre del entorno virtual) C:\Users\toled\Documents\APIText>
 ```
 
-Como ya confirmamos que nuestro entorno virtual esta encendido procederemos a instalr las herramientas necesarias para poder usar la API (estas herramientas y sus versiones estan en el documento <a href="https://github.com/ThunderGer23/APIText/blob/R2D2/requirements.txt">**requirements.txt**)</a>
+Como ya confirmamos que nuestro entorno virtual esta encendido procederemos a instalr las herramientas necesarias para poder usar la API (estas herramientas y sus versiones estan en el documento <a href="https://github.com/ThunderGer23/APIText/blob/R2D2/requirements.txt">**requirements.txt**</a>)
 
 <h5 align="center"><code>pip install -r requirements.txt</code></h5>
 
