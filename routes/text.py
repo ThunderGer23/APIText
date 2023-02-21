@@ -7,6 +7,7 @@ from os import getcwd
 from docs import tags_metadata
 import io
 from typing import List
+import re
 
 pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
 
@@ -39,8 +40,7 @@ async def submit_image(file: UploadFile = File(...),):
     id = conn.local.testimage.insert_one(image).inserted_id
     with Image.open(io.BytesIO(data)) as pic:
         texto = pytesseract.image_to_string(pic)
-        texto.replace('\\n', ' ')
-        texto.replace('\\t','  ')
+        texto.translate(' ','\\t\\n')
     return str({texto, id})
 
 @text.post('/submit_more', response_model= dict(), tags=["Text"])
