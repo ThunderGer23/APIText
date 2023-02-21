@@ -40,7 +40,8 @@ async def submit_image(file: UploadFile = File(...),):
     id = conn.local.testimage.insert_one(image).inserted_id
     with Image.open(io.BytesIO(data)) as pic:
         texto = pytesseract.image_to_string(pic)
-        texto.translate(' ','\\t\\n')
+        texto.sub('\\n', ' ')
+        texto.sub('\\t','  ')
     return str({texto, id})
 
 @text.post('/submit_more', response_model= dict(), tags=["Text"])
