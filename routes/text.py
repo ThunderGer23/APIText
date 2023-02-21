@@ -7,7 +7,6 @@ from os import getcwd
 from docs import tags_metadata
 import io
 from typing import List
-import re
 
 pytesseract.tesseract_cmd = r'/usr/bin/tesseract'
 
