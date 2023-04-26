@@ -1,5 +1,5 @@
 # Connecting to the MongoDB database.
 from pymongo import MongoClient
-from os import environ
+from config.keys import MongoCli
 
-conn = MongoClient(environ['MONGO_CLI'])
+conn = MongoClient(MongoCli)
